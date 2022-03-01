@@ -1,16 +1,38 @@
-# This is a sample Python script.
+from article_scrape import *
+from news_extract import *
+import time
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+print("Hi, welcome to Nuickly a fully functional news aggregator! \n"
+      "This is simply a prototype for what will be an awesome \n"
+      "application that will allow users to quickly search through \n"
+      "their favorite news, be provided with links to the actual article, \n"
+      "and be shown a quick summary what the article is about. ")
+print("------------------------------------------------------------------------------------------------------")
+print("To get started, please input a news agency you would to view! \n Al Jazeera \t BBC \t USA Today")
+user_agency = input("Type here: ")
+user_topic = ""
+if(user_agency.lower() == "Al Jazeera".lower()):
+      print("Which topic space would you like to view? \n News \t Sports \t Economy")
+      user_topic = input("Type here: ")
+elif(user_agency.lower() == "BBC".lower()):
+      print("Which topic space would you like to view? \n News \t Sports \t Economy")
+      user_topic = input("Type here: ")
+elif(user_agency.lower() == "USA Today".lower()):
+      print("Which topic space would you like to view? \n News \t Sports \t Money")
+      user_topic = input("Type here: ")
 
+print("------------------------------------------------------------------------------------------------------")
+print("Scraping articles...")
+links = get_content(user_agency, user_topic)
+time.sleep(2)
+print()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print("Preparing summaries...")
+time.sleep(2)
+author = ""
+formatted_date = ""
+top_image = ""
+article_summary = ""
+for i in links:
+      summarize_article(i)
+      print("Link to article: " + i)

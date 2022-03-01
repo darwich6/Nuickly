@@ -2,7 +2,31 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_content(url):
+def get_content(user_agency, user_topic):
+    # determine the correct url for the given agency and topic
+    url = ""
+    if(user_agency.lower() == "Al Jazeera".lower()):
+        if(user_topic.lower() == "News".lower()):
+            url = "https://www.aljazeera.com/news/"
+        elif(user_topic.lower() == "Sports".lower()):
+            url = "https://www.aljazeera.com/sports/"
+        elif(user_topic.lower() == "Economy".lower()):
+            url = "https://www.aljazeera.com/economy/"
+    elif(user_agency.lower() == "BBC".lower()):
+        if (user_topic.lower() == "News".lower()):
+            url = "https://www.bbc.com/news"
+        elif (user_topic.lower() == "Sports".lower()):
+            url = "https://www.bbc.com/sport"
+        elif (user_topic.lower() == "Economy".lower()):
+            url = "https://www.bbc.com/news/business/economy"
+    elif (user_agency.lower() == "USA Today".lower()):
+        if (user_topic.lower() == "News".lower()):
+            url = "https://www.usatoday.com/news/"
+        elif (user_topic.lower() == "Sports".lower()):
+            url = "https://www.usatoday.com/sports/"
+        elif (user_topic.lower() == "Money".lower()):
+            url = "https://www.usatoday.com/money/"
+
     page = requests.get(url)
     page_soup = BeautifulSoup(page.content, 'html.parser')
     # print(page_soup)
@@ -44,7 +68,7 @@ def get_content(url):
         for j in content:
             links.append(prefix + j)
         # looks like it worked
-        print(links)
+        # print(links)
 
     if (url == "https://www.bbc.com/news"):
         for i in page_soup.find_all('a', {"class": "gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor"}):
@@ -77,7 +101,7 @@ def get_content(url):
         prefix = "https://www.bbc.com"
         for j in content:
             links.append(prefix + j)
-        print(links)
+        # print(links)
 
     if (url == "https://www.usatoday.com/news/"):
         for i in page_soup.find_all('a', {"class": "gnt_m_flm_a gnt_lbl_pm gnt_m_flm_a__pm"}):
@@ -114,10 +138,6 @@ def get_content(url):
         prefix = "https://www.usatoday.com"
         for j in finalized_content:
             links.append(prefix + j)
-        print(links)
+        # print(links)
 
-
-
-get_content("https://www.usatoday.com/sports/")
-
-
+    return links
