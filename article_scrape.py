@@ -1,5 +1,7 @@
+import newspaper.article
 from newspaper import Article
 import nltk
+import time
 
 
 # create a function that will summarize the article based on inputted url
@@ -33,15 +35,21 @@ def summarize_article(url):
     top_image = str(article.top_image)
 
     # grab all the images within the article
-    image_string = "All Images: "
-    for image in article.images:
-        image_string += "\n\t" + image
+    # image_string = "All Images: "
+    # for image in article.images:
+    #    image_string += "\n\t" + image
     # print(image_string)
 
-    # print("A Quick Article Summary")
-    # print("----------------------------")
+    print("A Quick Article Summary")
+    print("----------------------------")
     print(article.summary)
+
+    print("Link to Original Article")
+    print("----------------------------")
+    print(url)
+    print()
 
     # grab the article summary
     article_summary = article.summary
 
+    return author, formatted_date, top_image, article_summary
