@@ -1,6 +1,7 @@
 import newspaper.article
 from newspaper import Article
 import nltk
+from article_nlp import *
 import time
 
 
@@ -43,6 +44,9 @@ def summarize_article(url):
     print("A Quick Article Summary")
     print("----------------------------")
     print(article.summary)
+
+    # print the sentiment analysis
+    find_sentiment(article.text)
 
     print("Link to Original Article")
     print("----------------------------")
